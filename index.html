@@ -9,56 +9,16 @@
 	<script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
 	<link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
 
+    <link rel="stylesheet" href="./styles.css">
+
 </head>
 
 <body>
-    <div id='map' style='width: 1000px; height: 1000px;'></div>
-	<script>
+    
+    <div id='map'></div>
 
-		let mapDiv = document.getElementById('map');
-		mapDiv.style.width = window.innerWidth + 'px';
-		mapDiv.style.height = window.innerHeight + 'px';
-		
+	<script src="./mapanimation.js"></script>
 
-		mapboxgl.accessToken = 'pk.eyJ1IjoibWF4b2hzYXdhIiwiYSI6ImNrb245ODZzejBqdTEycG5ycmZleDd3MjgifQ.SjZurMEWLiL31dhFqONGgg';
-		var map = new mapboxgl.Map({
-			container: 'map', // container ID
-			style: 'mapbox://styles/mapbox/streets-v11', // style URL
-			center: [-71.091542, 42.358862],
-			zoom: 14 // starting zoom
-		});
-	</script>
-
-
-	<script>
-
-		async function getBusLocations(){
-			const url = 'https://api-v3.mbta.com/vehicles?filter[route]=1&include=trip';
-			const response = await fetch(url);
-			const json = await response.json();
-			return json.data;
-		}
-
-		async function run(){
-			// get bus data    
-			const locations = await getBusLocations();
-			console.log(new Date());
-			console.log('longitude: ' + locations[0].attributes.longitude);
-			console.log('latitude: ' + locations[0].attributes.latitude)
-			marker.setLngLat({
-				lng: locations[0].attributes.longitude, 
-				lat: locations[0].attributes.latitude
-			});
-		
-			// timer
-			setTimeout(run, 15000);
-		}
-		
-		let marker = new mapboxgl.Marker().setLngLat([-71.092761, 42.357575]).addTo(map);
-
-		run();
-		
-		</script>
 </body>
 
 </html>
