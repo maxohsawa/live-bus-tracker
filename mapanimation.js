@@ -23,9 +23,6 @@ async function getBusLocations(){
 async function run(){
   
     const locations = await getBusLocations();
-    // console.log(new Date());
-    // console.log('longitude: ' + locations[0].attributes.longitude);
-    // console.log('latitude: ' + locations[0].attributes.latitude)
 
     locations.forEach( (bus, i) => {
         markers[i].setLngLat({
@@ -33,11 +30,6 @@ async function run(){
             lat: bus.attributes.latitude
         }).addTo(map);
     });
-
-    // marker.setLngLat({
-    //     lng: locations[0].attributes.longitude, 
-    //     lat: locations[0].attributes.latitude
-    // });
 
     setTimeout(run, 15000);
 }
